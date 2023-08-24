@@ -1,33 +1,23 @@
-class WeatherModel {
-String getWeatherIcon(int condition) {
-  if (condition < 300) {
-    return '🌩';
-  } else if (condition < 400) {
-    return '🌧';
-  } else if (condition < 600) {
-    return '☔️';
-  } else if (condition < 700) {
-    return '☃️';
-  } else if (condition < 800) {
-    return '🌫';
-  } else if (condition == 800) {
-    return '☀️';
-  } else if (condition <= 804) {
-    return '☁️';
-  } else {
-    return '🤷‍';
-  }
-}
+import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
-String getMessage(int temp) {
-  if (temp > 25) {
-    return 'It\'s 🍦 time';
-  } else if (temp > 20) {
-    return 'Time for shorts and 👕';
-  } else if (temp < 10) {
-    return 'You\'ll need 🧣 and 🧤';
-  } else {
-    return 'Bring a 🧥 just in case';
+class NetworkHelper {
+  final String url;
+
+  NetworkHelper({required this.url});
+
+  Future getData() async {
+    String apiKey = dotenv.get('API_KEY');
+
+    final apiUrl = Uri.parse('$url&appid=$apiKey');
+
+    http.Response response = await http.post(apiUrl);
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      return -1;
+    }
   }
-}
 }
