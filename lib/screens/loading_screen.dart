@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mate_cli/services/location.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -33,7 +33,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     final apiUrl = Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&units=metric&appid=$apiKey');
 
-    Response response = await get(apiUrl);
+    http.Response response = await http.post(apiUrl);
 
     print(response.body);
   }
