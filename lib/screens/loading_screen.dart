@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mate_cli/services/location.dart';
@@ -35,6 +37,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     http.Response response = await http.post(apiUrl);
 
-    print(response.body);
+    if (response.statusCode == 200) {
+      final decodedData = jsonDecode(response.body);
+      final double temperature = decodedData['main']['temp'];
+      final int conditionNumber = decodedData['weather'][0]['id'];
+      final String cityName = decodedData['name'];
+
+      print('temp: $temperature, coNo: $conditionNumber, city: $cityName');
+
+    } else {
+      print(response.statusCode);
+    }
+
+
   }
 }
