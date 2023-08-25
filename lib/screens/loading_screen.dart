@@ -19,14 +19,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
         body: Center(
           child: SpinKitWave(
-            color: const Color(0xFFAC7339),
+            color: Color(0xFFAC7339),
             size: 40.0,
           ),
         ),
-      backgroundColor: const Color(0xFF1a1300),
+      backgroundColor: Color(0xFF1a1300),
     );
   }
 
@@ -37,9 +37,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var weatherData = data['weatherData'];
     var errorData = data['error'];
 
-    Navigator.push(context, MaterialPageRoute(builder: (context){
-      return LocationScreen(locationWeather: weatherData, locationError: errorData,);
-    }));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context){
+          return LocationScreen(
+            locationWeather: weatherData,
+            locationError: errorData,
+          );
+        }),
+    );
     checkLocationEnabled(errorData);
   }
 
@@ -52,12 +59,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
             margin: const EdgeInsets.all(8.0),
             height: 80,
             decoration: const BoxDecoration(
-              color: const Color(0xFF734d26),
+              color: Color(0xFF734d26),
               borderRadius: BorderRadius.all(Radius.circular(10),),
             ),
             child: Row(
               children: <Widget>[
-                Icon(
+                const Icon(
                   Icons.error_outline,
                   size: 40,
                   color: Colors.red,
@@ -67,7 +74,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Error",
                         style: TextStyle(
                           fontSize: 18,
@@ -80,7 +87,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       ),
                       Text(
                         error,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                         ),

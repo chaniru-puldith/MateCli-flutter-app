@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mate_cli/screens/city_screen.dart';
 import 'package:mate_cli/services/weather.dart';
 import 'package:mate_cli/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
-  final locationWeather;
-  final locationError;
+  final dynamic locationWeather;
+  final String? locationError;
 
   const LocationScreen({super.key, required this.locationWeather, this.locationError});
 
@@ -33,7 +34,7 @@ class _LocationScreenState extends State<LocationScreen> {
         decoration: const BoxDecoration(
           color: Color(0xFF1a1300),
         ),
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: SafeArea(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,14 +51,23 @@ class _LocationScreenState extends State<LocationScreen> {
                       updateUI(weatherData);
                       checkLocationEnabled(errorData);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.my_location,
                       size: 50.0,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: Icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return CityScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: const Icon(
                       Icons.travel_explore,
                       size: 50.0,
                     ),
@@ -65,7 +75,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 15.0),
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Row(
                   children: <Widget>[
                     Text(
@@ -119,7 +129,7 @@ class _LocationScreenState extends State<LocationScreen> {
             ),
             child: Row(
               children: <Widget>[
-                Icon(
+                const Icon(
                   Icons.error_outline,
                   size: 40,
                   color: Colors.red,
@@ -129,7 +139,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(
+                      const Text(
                         "Error",
                         style: TextStyle(
                           fontSize: 18,
@@ -142,7 +152,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                       Text(
                         error,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 14,
                         ),

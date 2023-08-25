@@ -14,7 +14,7 @@ class _CityScreenState extends State<CityScreen> {
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
-          color: Color(0xFF0A0E21),
+          color: Color(0xFF1a1300),
         ),
         constraints: BoxConstraints.expand(),
         child: SafeArea(
