@@ -4,20 +4,21 @@ import 'package:mate_cli/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
   final locationWeather;
+  final locationError;
 
-  const LocationScreen({super.key, required this.locationWeather});
+  const LocationScreen({super.key, required this.locationWeather, this.locationError});
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weatherModel = WeatherModel();
   late int temperature ;
   late int condition;
   late String cityName;
   late String message;
   late String weatherIcon;
-  WeatherModel weatherModel = WeatherModel();
 
   @override
   void initState() {
@@ -42,7 +43,13 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var data = await weatherModel.getLocationWeather();
+                      var weatherData = data['weatherData'];
+                      var errorData = data['error'];
+                      updateUI(weatherData);
+                      checkLocationEnabled(errorData);
+                    },
                     child: Icon(
                       Icons.my_location,
                       size: 50.0,
@@ -88,11 +95,71 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUI (dynamic weatherData) {
-    double temp = weatherData['main']['temp'];
-    temperature = temp.toInt();
-    condition = weatherData['weather'][0]['id'];
-    cityName = weatherData['name'];
-    message = weatherModel.getMessage(temperature);
-    weatherIcon = weatherModel.getWeatherIcon(condition);
+    setState(() {
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      condition = weatherData['weather'][0]['id'];
+      cityName = weatherData['name'];
+      message = weatherModel.getMessage(temperature);
+      weatherIcon = weatherModel.getWeatherIcon(condition);
+    });
+  }
+
+  void checkLocationEnabled(error) {
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            padding: const EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
+            height: 80,
+            decoration: const BoxDecoration(
+              color: const Color(0xFF734d26),
+              borderRadius: BorderRadius.all(Radius.circular(10),),
+            ),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.error_outline,
+                  size: 40,
+                  color: Colors.red,
+                ),
+                const SizedBox(width: 10.0,),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Error",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6.0,
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      );
+    }
   }
 }

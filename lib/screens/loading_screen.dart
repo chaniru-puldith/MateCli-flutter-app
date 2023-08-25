@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mate_cli/services/location.dart';
-import 'package:mate_cli/services/networking.dart';
-import 'package:mate_cli/screens/location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:mate_cli/services/weather.dart';
+import 'location_screen.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -31,19 +30,20 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 
-  Future<void> getLocationData() async {
-    Location location = Location();
-    String? error  = await location.getCurrentLocation();
+  Future <void> getLocationData() async {
+    WeatherModel weatherModel = WeatherModel();
+    var data = await weatherModel.getLocationWeather();
 
-
-    NetworkHelper networkHelper = NetworkHelper(url: 'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${location.latitude}&lon=${location.longitude}');
-
-    var weatherData = await networkHelper.getData();
+    var weatherData = data['weatherData'];
+    var errorData = data['error'];
 
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return LocationScreen(locationWeather: weatherData,);
+      return LocationScreen(locationWeather: weatherData, locationError: errorData,);
     }));
+    checkLocationEnabled(errorData);
+  }
 
+  void checkLocationEnabled(error) {
     if (error != null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
