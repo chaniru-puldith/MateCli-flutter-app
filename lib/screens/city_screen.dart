@@ -13,7 +13,7 @@ class _CityScreenState extends State<CityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFF1a1300),
         ),
         constraints: BoxConstraints.expand(),
@@ -24,19 +24,19 @@ class _CityScreenState extends State<CityScreen> {
                 alignment: Alignment.topLeft,
                 child: TextButton(
                   onPressed: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
                   ),
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(20.0),
-                child: null,
+                padding: const EdgeInsets.all(20.0),
+                child: kTextFieldInputDecoration,
               ),
               TextButton(
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Get Weather',
                   style: kButtonTextStyle,
                 ),
