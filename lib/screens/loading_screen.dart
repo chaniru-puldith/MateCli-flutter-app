@@ -33,14 +33,71 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   Future<void> getLocationData() async {
     Location location = Location();
-    await location.getCurrentLocation();
-    
+    String? error  = await location.getCurrentLocation();
+
+
     NetworkHelper networkHelper = NetworkHelper(url: 'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${location.latitude}&lon=${location.longitude}');
 
     var weatherData = await networkHelper.getData();
-    
+
     Navigator.push(context, MaterialPageRoute(builder: (context){
       return LocationScreen(locationWeather: weatherData,);
     }));
+
+    if (error != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Container(
+            padding: const EdgeInsets.all(8.0),
+            margin: const EdgeInsets.all(8.0),
+            height: 80,
+            decoration: const BoxDecoration(
+              color: const Color(0xFF734d26),
+              borderRadius: BorderRadius.all(Radius.circular(10),),
+            ),
+            child: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.error_outline,
+                  size: 40,
+                  color: Colors.red,
+                ),
+                const SizedBox(width: 10.0,),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "Error",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6.0,
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+      );
+    }
   }
 }

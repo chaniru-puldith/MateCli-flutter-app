@@ -4,14 +4,17 @@ class Location {
   late double latitude;
   late double longitude;
 
-  Future<void> getCurrentLocation() async {
+  Future<String?> getCurrentLocation() async {
     try {
       Position position = await _determinePosition();
       longitude = position.longitude;
       latitude = position.latitude;
       print(position);
+      return null;
     } catch(e) {
-      print(e);
+      longitude=-122.084;
+      latitude=37.4219983;
+      return e.toString();
     }
   }
 
