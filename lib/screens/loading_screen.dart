@@ -23,10 +23,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Scaffold(
         body: Center(
           child: SpinKitWave(
-            color: Colors.white,
-            size: 50.0,
+            color: const Color(0xFFAC7339),
+            size: 40.0,
           ),
         ),
+      backgroundColor: const Color(0xFF1a1300),
     );
   }
 
@@ -36,10 +37,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
     
     NetworkHelper networkHelper = NetworkHelper(url: 'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${location.latitude}&lon=${location.longitude}');
 
-    var weatherData = networkHelper.getData();
+    var weatherData = await networkHelper.getData();
     
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return LocationScreen();
+      return LocationScreen(locationWeather: weatherData,);
     }));
   }
 }
