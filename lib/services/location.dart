@@ -11,9 +11,9 @@ class Location {
       latitude = position.latitude;
       print(position);
       return null;
-    } catch(e) {
-      longitude=-122.084;
-      latitude=37.4219983;
+    } catch (e) {
+      longitude = -122.084;
+      latitude = 37.4219983;
       return e.toString();
     }
   }
@@ -52,6 +52,7 @@ class Location {
 
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
-    return await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.low);
   }
 }

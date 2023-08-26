@@ -7,7 +7,8 @@ class LocationScreen extends StatefulWidget {
   final dynamic locationWeather;
   final String? locationError;
 
-  const LocationScreen({super.key, required this.locationWeather, this.locationError});
+  const LocationScreen(
+      {super.key, required this.locationWeather, this.locationError});
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
@@ -15,7 +16,7 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weatherModel = WeatherModel();
-  late int temperature ;
+  late int temperature;
   late int condition;
   late String cityName;
   late String message;
@@ -30,7 +31,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -107,7 +108,7 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 
-  void updateUI (dynamic weatherData) {
+  void updateUI(dynamic weatherData) {
     setState(() {
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
@@ -128,7 +129,9 @@ class _LocationScreenState extends State<LocationScreen> {
             height: 80,
             decoration: const BoxDecoration(
               color: Color(0xFF734d26),
-              borderRadius: BorderRadius.all(Radius.circular(10),),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
             child: Row(
               children: <Widget>[
@@ -137,7 +140,9 @@ class _LocationScreenState extends State<LocationScreen> {
                   size: 40,
                   color: Colors.red,
                 ),
-                const SizedBox(width: 10.0,),
+                const SizedBox(
+                  width: 10.0,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

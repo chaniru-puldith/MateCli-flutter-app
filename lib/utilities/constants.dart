@@ -23,8 +23,10 @@ const kConditionTextStyle = TextStyle(
 const kTextFieldInputDecoration = TextField(
   autofocus: true,
   decoration: InputDecoration(
-    border:OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(10.0),),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(10.0),
+      ),
     ),
     filled: true,
     fillColor: Color(0x30AC7339),

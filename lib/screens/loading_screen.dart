@@ -20,19 +20,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: SpinKitWave(
-              color: Color(0xFFAC7339),
-              size: 40.0,
-            ),
+      body: SafeArea(
+        child: Center(
+          child: SpinKitWave(
+            color: Color(0xFFAC7339),
+            size: 40.0,
           ),
         ),
+      ),
       backgroundColor: Color(0xFF1a1300),
     );
   }
 
-  Future <void> getLocationData() async {
+  Future<void> getLocationData() async {
     WeatherModel weatherModel = WeatherModel();
     var data = await weatherModel.getLocationWeather();
 
@@ -53,7 +53,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
             height: 80,
             decoration: const BoxDecoration(
               color: Color(0xFF734d26),
-              borderRadius: BorderRadius.all(Radius.circular(10),),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
             ),
             child: Row(
               children: <Widget>[
@@ -62,7 +64,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
                   size: 40,
                   color: Colors.red,
                 ),
-                const SizedBox(width: 10.0,),
+                const SizedBox(
+                  width: 10.0,
+                ),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,13 +108,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void navigatorScreen(dynamic weatherData, dynamic errorData) {
     Navigator.push(
       context,
-      MaterialPageRoute(
-          builder: (context){
-            return LocationScreen(
-              locationWeather: weatherData,
-              locationError: errorData,
-            );
-          }),
+      MaterialPageRoute(builder: (context) {
+        return LocationScreen(
+          locationWeather: weatherData,
+          locationError: errorData,
+        );
+      }),
     );
   }
 }
