@@ -20,10 +20,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: Center(
-          child: SpinKitWave(
-            color: Color(0xFFAC7339),
-            size: 40.0,
+        body: SafeArea(
+          child: Center(
+            child: SpinKitWave(
+              color: Color(0xFFAC7339),
+              size: 40.0,
+            ),
           ),
         ),
       backgroundColor: Color(0xFF1a1300),
@@ -37,16 +39,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var weatherData = data['weatherData'];
     var errorData = data['error'];
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context){
-          return LocationScreen(
-            locationWeather: weatherData,
-            locationError: errorData,
-          );
-        }),
-    );
+    navigatorScreen(weatherData, errorData);
     checkLocationEnabled(errorData);
   }
 
@@ -106,5 +99,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
         ),
       );
     }
+  }
+
+  void navigatorScreen(dynamic weatherData, dynamic errorData) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context){
+            return LocationScreen(
+              locationWeather: weatherData,
+              locationError: errorData,
+            );
+          }),
+    );
   }
 }

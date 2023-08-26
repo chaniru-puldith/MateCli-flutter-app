@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           primary: const Color(0xFFc68c53),
         ),
       ),
-      home: LoadingScreen(),
+      home: const LoadingScreen(),
     );
   }
 }

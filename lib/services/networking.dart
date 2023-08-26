@@ -12,7 +12,7 @@ class NetworkHelper {
 
     final apiUrl = Uri.parse('$url&appid=$apiKey');
 
-    http.Response response = await http.post(apiUrl);
+    http.Response response = await http.get(apiUrl);
 
     if (response.statusCode == 200) {
       return jsonDecode(response.body);

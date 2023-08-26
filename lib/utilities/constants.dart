@@ -21,6 +21,7 @@ const kConditionTextStyle = TextStyle(
 );
 
 const kTextFieldInputDecoration = TextField(
+  autofocus: true,
   decoration: InputDecoration(
     border:OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10.0),),
@@ -29,6 +30,7 @@ const kTextFieldInputDecoration = TextField(
     fillColor: Color(0x30AC7339),
     icon: Icon(
       Icons.travel_explore,
+      color: Color(0xFFc68c53),
     ),
     hintText: 'Enter City Name',
   ),

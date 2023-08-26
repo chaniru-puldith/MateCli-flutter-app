@@ -30,74 +30,77 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF1a1300),
-        ),
-        constraints: const BoxConstraints.expand(),
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  TextButton(
-                    onPressed: () async {
-                      var data = await weatherModel.getLocationWeather();
-                      var weatherData = data['weatherData'];
-                      var errorData = data['error'];
-                      updateUI(weatherData);
-                      checkLocationEnabled(errorData);
-                    },
-                    child: const Icon(
-                      Icons.my_location,
-                      size: 50.0,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return CityScreen();
-                          },
-                        ),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.travel_explore,
-                      size: 50.0,
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Row(
+      resizeToAvoidBottomInset : false,
+      body: SafeArea(
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF1a1300),
+          ),
+          constraints: const BoxConstraints.expand(),
+          child: SafeArea(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
-                      '$temperature°',
-                      style: kTempTextStyle,
+                    TextButton(
+                      onPressed: () async {
+                        var data = await weatherModel.getLocationWeather();
+                        var weatherData = data['weatherData'];
+                        var errorData = data['error'];
+                        updateUI(weatherData);
+                        checkLocationEnabled(errorData);
+                      },
+                      child: const Icon(
+                        Icons.my_location,
+                        size: 50.0,
+                      ),
                     ),
-                    Text(
-                      weatherIcon,
-                      style: kConditionTextStyle,
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return CityScreen();
+                            },
+                          ),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.travel_explore,
+                        size: 50.0,
+                      ),
                     ),
                   ],
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(right: 15.0),
-                child: Text(
-                  '$message in $cityName!',
-                  textAlign: TextAlign.right,
-                  style: kMessageTextStyle,
+                Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        '$temperature°',
+                        style: kTempTextStyle,
+                      ),
+                      Text(
+                        weatherIcon,
+                        style: kConditionTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(right: 15.0),
+                  child: Text(
+                    '$message in $cityName!',
+                    textAlign: TextAlign.right,
+                    style: kMessageTextStyle,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -124,7 +127,7 @@ class _LocationScreenState extends State<LocationScreen> {
             margin: const EdgeInsets.all(8.0),
             height: 80,
             decoration: const BoxDecoration(
-              color: const Color(0xFF734d26),
+              color: Color(0xFF734d26),
               borderRadius: BorderRadius.all(Radius.circular(10),),
             ),
             child: Row(
