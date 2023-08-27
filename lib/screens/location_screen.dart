@@ -5,7 +5,7 @@ import 'package:mate_cli/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
   final dynamic locationWeather;
-  final String? locationError;
+  final dynamic locationError;
 
   const LocationScreen(
       {super.key, required this.locationWeather, this.locationError});
@@ -60,8 +60,8 @@ class _LocationScreenState extends State<LocationScreen> {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async {
+                        var enteredCityName = await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) {
@@ -69,6 +69,15 @@ class _LocationScreenState extends State<LocationScreen> {
                             },
                           ),
                         );
+
+                        if (enteredCityName != null) {
+                          var data  = await weatherModel.getCityWeather(enteredCityName);
+                          var weatherData = data['weatherData'];
+                          var errorData = data['error'];
+
+                          errorData != -1 ? updateUI(weatherData) : {};
+                          checkLocationEnabled(errorData);
+                        }
                       },
                       child: const Icon(
                         Icons.travel_explore,
@@ -119,8 +128,11 @@ class _LocationScreenState extends State<LocationScreen> {
     });
   }
 
-  void checkLocationEnabled(error) {
+  void checkLocationEnabled(dynamic error) {
     if (error != null) {
+      if (error == -1) {
+        error = 'City Not found';
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Container(

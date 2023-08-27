@@ -5,6 +5,22 @@ const openWeatherMapURL =
     'https://api.openweathermap.org/data/2.5/weather?units=metric';
 
 class WeatherModel {
+
+  Future<Map<String, dynamic>> getCityWeather(String cityName) async {
+    Location location = Location();
+    dynamic error = await location.getCurrentLocation();
+
+    NetworkHelper networkHelper = NetworkHelper(
+        url:
+        '$openWeatherMapURL&q=$cityName');
+
+    var weatherData = await networkHelper.getData();
+
+    error = weatherData == -1 ? weatherData: error;
+
+    return <String, dynamic>{'weatherData': weatherData, 'error': error};
+  }
+
   Future<Map<String, dynamic>> getLocationWeather() async {
     Location location = Location();
     String? error = await location.getCurrentLocation();
