@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mate_cli/screens/city_screen.dart';
 import 'package:mate_cli/services/weather.dart';
@@ -95,7 +94,7 @@ class _LocationScreenState extends State<LocationScreen> {
                             context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return CityScreen();
+                                return const CityScreen();
                               },
                             ),
                           );
