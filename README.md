@@ -15,5 +15,6 @@ Successfully conceptualized and developed the "MateCli" mobile application, a us
 <img src="https://github.com/chaniru-puldith/EzyQuizzy-flutter-app/assets/131237062/54038471-e6a8-46e1-8cd8-64de2c5c7ba2" width="400px" align="right">&nbsp;&nbsp;<br><br>
 <img src="https://github.com/chaniru-puldith/EzyQuizzy-flutter-app/assets/131237062/26f3ca24-311f-4236-9e14-a0361422de4c" width="400px">
 <img src="https://github.com/chaniru-puldith/EzyQuizzy-flutter-app/assets/131237062/7b100e74-2c27-40ae-b555-644377274d8d" width="400px" align="right">&nbsp;&nbsp;<br><br>
-<img src="https://github.com/chaniru-puldith/EzyQuizzy-flutter-app/assets/131237062/69f423c1-1b8f-41c6-8403-58b9326725de" width="400px">
-&nbsp;&nbsp;<br><br>
+<p align="center">
+  <img src="https://github.com/chaniru-puldith/EzyQuizzy-flutter-app/assets/131237062/69f423c1-1b8f-41c6-8403-58b9326725de" width="400px">
+</p>
